@@ -6,7 +6,7 @@ public:
 	DataBase<Client>* BOU = NULL;
 	DataBase<Client>* BORC = NULL;
 	virtual void SetListRegClient(DataBase<Client>*);
-	virtual void Confirm();
+	//virtual void Confirm();
 	virtual bool Work();
 	virtual void Creat(int);
 };

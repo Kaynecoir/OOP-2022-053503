@@ -82,24 +82,28 @@ void UserBase::AddClient(Client* c, int s)
 }
 User* UserBase::RegOperator(int s)
 {
-	Operator* temp = new Operator();
+	OperatorForm OpF;
+	OpF.op = new Operator();
+	//Operator* temp = new Operator();
 	cout << "Enter Personal Data in the appropriate fields\n\n";
-	temp->Creat(s);
-	temp->SetListClient(&BOC);
-	temp->SetMoneyBase(BOMoney);
-	BOO.Add(temp);
-	return temp;
+	OpF.Creat(s);
+	OpF.op->SetListClient(&BOC);
+	OpF.op->SetMoneyBase(BOMoney);
+	BOO.Add(OpF.op);
+	return OpF.op;
 }
 User* UserBase::RegManager(int s)
 {
-	Manager* temp = new Manager();
+	ManagerForm ManF;
+	ManF.man = new Manager();
+	//Manager* temp = new Manager();
 	cout << "Enter Personal Data in the appropriate fields\n\n";
-	temp->Creat(s);
-	temp->SetListClient(&BOC);
-	temp->SetListRegClient(&BORC);
-	temp->SetMoneyBase(BOMoney);
-	BOM.Add(temp);
-	return temp;
+	ManF.Creat(s);
+	ManF.man->SetListClient(&BOC);
+	ManF.man->SetListRegClient(&BORC);
+	ManF.man->SetMoneyBase(BOMoney);
+	BOM.Add(ManF.man);
+	return ManF.man;
 }
 User* UserBase::RegSpecialist(int s)
 {
@@ -112,14 +116,16 @@ User* UserBase::RegSpecialist(int s)
 }
 User* UserBase::RegAdministrator(int s)
 {
-	Administrator* temp = new Administrator();
+	//Administrator* temp = new Administrator();
+	AdminForm AdF;
+	AdF.Ad = new Administrator();
 	cout << "Enter Personal Data in the appropriate fields\n\n";
-	temp->Creat(s);
-	temp->SetListClient(&BOC);
-	temp->SetListRegClient(&BORC);
-	temp->SetMoneyBase(BOMoney);
-	BOA.Add(temp);
-	return temp;
+	AdF.Creat(s);
+	AdF.Ad->SetListClient(&BOC);
+	AdF.Ad->SetListRegClient(&BORC);
+	AdF.Ad->SetMoneyBase(BOMoney);
+	BOA.Add(AdF.Ad);
+	return AdF.Ad;
 }
 void UserBase::ListUser()
 {

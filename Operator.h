@@ -8,9 +8,9 @@ public:
 	Client* ChoseClient = NULL;
 	Transaction* ChoseTransaction = NULL;
 	virtual void SetListClient(DataBase<Client>*);
-	virtual void SeeListClient();
-	virtual void ChangeStatus();
-	virtual void AllHistory();
+	//virtual void SeeListClient();
+	//virtual void ChangeStatus();
+	//virtual void AllHistory();
 	virtual bool Work();
 	virtual void Creat(int);
 };

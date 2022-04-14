@@ -143,6 +143,33 @@ bool Programm::Enter()
 			system("cls");
 		} while (ClF.Work());
 	}
+	else if (MainUser->IndifNum > 2000 && MainUser->IndifNum < 3000)
+	{
+		OperatorForm OpF;
+		OpF.op = (Operator*)MainUser;
+		do
+		{
+			system("cls");
+		} while (OpF.Work());
+	}
+	else if (MainUser->IndifNum > 3000 && MainUser->IndifNum < 4000)
+	{
+		ManagerForm ManF;
+		ManF.man = (Manager*)MainUser;
+		do
+		{
+			system("cls");
+		} while (ManF.Work());
+	}
+	else if (MainUser->IndifNum > 4000 && MainUser->IndifNum < 5000)
+	{
+		AdminForm AdF;
+		AdF.Ad = (Administrator*)MainUser;
+		do
+		{
+			system("cls");
+		} while (AdF.Work());
+	}
 	else
 	{
 		do

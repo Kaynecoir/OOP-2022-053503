@@ -4,6 +4,7 @@
 #include "Administrator.h"
 #include "DataBase.h"
 #include "ClientForm.h"
+#include "AdminForm.h"
 
 class UserBase
 {
