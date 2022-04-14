@@ -7,11 +7,10 @@
 class Programm
 {
 public:
-	UserBase BOU;				// Base Of User
-	//MoneyBase BOMoney;			// Base Of Money
+	MoneyBase GlobalMB;			// Base Of Money
+	UserBase BOU;			// Base Of User
 	User* MainUser = NULL;				// User what work in programm
-	//DataBase<Bank> BOB;			// Base of Bank
-	//Programm();
+
 	virtual ~Programm();
 	void ListUser();
 	bool Start();				// Chose Enter or Register

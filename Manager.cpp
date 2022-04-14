@@ -11,9 +11,6 @@ void Manager::Creat(int s)
 	cout << "Name: ";		cin >> Name;
 	cout << "Surname: ";	cin >> SurName;
 	cout << "Fathername: ";	cin >> FatherName;
-	cout << "Passport: ";	cin >> Passport;
-	cout << "Telephone: ";	cin >> Telephone;
-	cout << "Email: ";		cin >> Email;
 	IndifNum = 3001 + s;
 }
 bool Manager::Work()
@@ -55,18 +52,21 @@ void Manager::Confirm()
 		if (v >= BORC->Size || v < 0)
 			v = 0;
 		system("cls");
+		ClientForm ClF;
 		BORC->Head();
 		for (int i = 0; i < BORC->Size; i++)
 		{
+			ClF.cl = BORC->GetChose();
 			cout << i + 1 << endl;
 			if (v == i)
-				BORC->GetChose()->Info();
+				ClF.Info();
 			else
-				cout << "\t" << BORC->GetChose()->Name << " " << BORC->GetChose()->SurName << endl;
+				cout << "\t" << ClF.cl->Name << " " << ClF.cl->SurName << endl;
 			BORC->Next();
 		}
 		int ch;
-		cout << "\n1. Up\n2. Down\n3. Confirm Rgistration\n4. Back";
+		cout << "\n1. Up\n2. Down\n3. Confirm Rgistration\n4. Back\n";
+		cout << "\nChose: ";
 		if ((cin >> ch).fail() || ch < 0 || ch > 4)
 		{
 			system("cls");
@@ -84,10 +84,12 @@ void Manager::Confirm()
 			{
 				BORC->Next();
 			}
-			Client* temp = BORC->GetChose();
-			BORC->Change(new Client());
-			BORC->DeleteChose();
-			BOC->Add(temp);
+			if (BORC->GetChose()->IndifNum != 0)
+			{
+				Client* temp = BORC->GetData();
+				temp->IndifNum = 1001 + BOC->Size;
+				BOC->Add(temp);
+			}
 		}
 		else if (ch == 4)
 			return;

@@ -3,6 +3,7 @@
 #include "Specialist.h"
 #include "Administrator.h"
 #include "DataBase.h"
+#include "ClientForm.h"
 
 class UserBase
 {
@@ -13,13 +14,12 @@ public:
 	DataBase<Manager> BOM;			// Base of Manager
 	DataBase<Specialist> BOS;		// Base of Specialist
 	DataBase<Administrator> BOA;	// Base of Administrator
-	//MoneyBase* BOMoney;
+	MoneyBase* BOMoney;
 
-	virtual ~UserBase() 
-	{
-		BOC.~DataBase();
-		BORC.~DataBase();
-	}
+	UserBase() {};
+	virtual ~UserBase() {};
+
+
 	User* Find(string, string);
 	User* Creat();
 	Client* RegClient();				// Creat data about Client

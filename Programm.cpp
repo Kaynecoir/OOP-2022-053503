@@ -3,6 +3,7 @@
 
 void Programm::MainProcess()
 {
+	BOU.BOMoney = &GlobalMB;
 	bool EndProcess = false;
 	while (!EndProcess)
 	{
@@ -77,16 +78,16 @@ bool Programm::Registration()
 		BOU.AddRegClient();
 		break;
 	case 2:
-		MainUser = BOU.RegOperator(BOU.BOO.Size);
+		BOU.RegOperator(BOU.BOO.Size);
 		break;
 	case 3:
-		MainUser = BOU.RegManager(BOU.BOM.Size);
+		BOU.RegManager(BOU.BOM.Size);
 		break;
 	case 4:
-		MainUser = BOU.RegSpecialist(BOU.BOS.Size);
+		BOU.RegSpecialist(BOU.BOS.Size);
 		break;
 	case 5:
-		MainUser = BOU.RegAdministrator(BOU.BOA.Size);
+		BOU.RegAdministrator(BOU.BOA.Size);
 		break;
 	default:
 		return false;
@@ -133,10 +134,23 @@ bool Programm::Enter()
 		_getch();
 		return true;
 	}
-	do
+	if (MainUser->IndifNum < 2000)
 	{
-		system("cls");
-	} while (MainUser->Work());
+		ClientForm ClF;
+		ClF.cl = (Client*)MainUser;
+		do
+		{
+			system("cls");
+		} while (ClF.Work());
+	}
+	else
+	{
+		do
+		{
+			system("cls");
+		} while (MainUser->Work());
+	}
+	MainUser = NULL;
 	return false;
 }
 void Programm::ListUser()

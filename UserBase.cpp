@@ -59,11 +59,13 @@ User* UserBase::Find(string l, string p)
 
 Client* UserBase::RegClient()
 {
-	Client* temp = new Client();
+	//Client* temp = new Client;
+	ClientForm ClF;
+	ClF.cl = new Client();
 	cout << "Enter Personal Data in the appropriate fields\n\n";
-	temp->Creat(0);
-	//temp->GlobalMB = BOMoney;
-	return temp;
+	ClF.Creat(0);
+	ClF.cl->SetMoneyBase(BOMoney);
+	return ClF.cl;
 }
 void UserBase::AddRegClient()
 {
@@ -84,6 +86,7 @@ User* UserBase::RegOperator(int s)
 	cout << "Enter Personal Data in the appropriate fields\n\n";
 	temp->Creat(s);
 	temp->SetListClient(&BOC);
+	temp->SetMoneyBase(BOMoney);
 	BOO.Add(temp);
 	return temp;
 }
@@ -94,6 +97,7 @@ User* UserBase::RegManager(int s)
 	temp->Creat(s);
 	temp->SetListClient(&BOC);
 	temp->SetListRegClient(&BORC);
+	temp->SetMoneyBase(BOMoney);
 	BOM.Add(temp);
 	return temp;
 }
@@ -103,6 +107,7 @@ User* UserBase::RegSpecialist(int s)
 	cout << "Enter Personal Data in the appropriate fields\n\n";
 	temp->Creat(s);
 	BOS.Add(temp);
+	temp->SetMoneyBase(BOMoney);
 	return temp;
 }
 User* UserBase::RegAdministrator(int s)
@@ -112,6 +117,7 @@ User* UserBase::RegAdministrator(int s)
 	temp->Creat(s);
 	temp->SetListClient(&BOC);
 	temp->SetListRegClient(&BORC);
+	temp->SetMoneyBase(BOMoney);
 	BOA.Add(temp);
 	return temp;
 }

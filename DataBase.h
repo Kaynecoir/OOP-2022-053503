@@ -27,7 +27,6 @@ public:
 		{
 			head = newt;
 			chose = head;
-			chose->activ = true;
 			tail = head;
 		}
 		else
@@ -52,7 +51,6 @@ public:
 		else
 			tail = p;
 		chose = head;
-		chose->activ = true;
 		Size--;
 	}
 	void Delete()
@@ -74,12 +72,10 @@ public:
 	}
 	void Next()
 	{
-		chose->activ = false;
 		if (chose->next != NULL)
 			chose = chose->next;
 		else
 			chose = head;
-		chose->activ = true;
 	}
 	void Prev()
 	{
@@ -94,9 +90,7 @@ public:
 	{
 		if (chose != NULL)
 		{
-			chose->activ = false;
 			chose = head;
-			chose->activ = true;
 		}
 	}
 	T* GetChose()
@@ -111,6 +105,13 @@ public:
 	{
 		delete chose->data;
 		chose->data = t;
+	}
+	T* GetData()
+	{
+		T* temp = chose->data;
+		chose->data = NULL;
+		DeleteChose();
+		return temp;
 	}
 };
 

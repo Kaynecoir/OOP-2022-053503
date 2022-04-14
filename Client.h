@@ -1,27 +1,37 @@
 #pragma once
 #include "User.h"
-//#include "MoneyBase.h"
+
 class Client : public User
 {
 public:
 	string Name, SurName, FatherName;
 	string Passport;
 	string Telephone, Email;
-	//DataBase<Investment> IB;				// Investment Base of Person
-	//MoneyBase* GlobalMB;					// MoneyBase of main process
-	//DataBase<> CB;
+	DataBase<Investment> InvestB;				// Investment Base of Person
+	//DataBase<Credit> CreditB;
+	Investment* ChoseInvest;
+	//Credit* ChoseCredit;
 
 	Client();
-	Client(string, string);
 	Client(Client*);
 	virtual ~Client();
 
+	//	Invest funct
+	void MenuInvest();
 	void CreatInvestment();
-	void SeeCapital();
-	void WithDrawal();
+	void TopUpInvest();
+	void WithDrawalInvest();
+	bool ListInvest();
 	void Transacting();
+	void WithDrawal();
+
+	//	Credit funct
+	//void MenuCredit();
+	void ListCredit();
 	void ChangeStatus();
 	void TakeCredit();
+
+	//	Other funct
 	bool Work();
 	void Creat(int);
 	void Info();
