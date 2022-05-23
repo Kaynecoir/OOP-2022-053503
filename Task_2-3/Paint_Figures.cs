@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 using System.Windows.Forms;
+using BasicFigure;
 
 namespace Task_2_3
 {
     class Paint_Figures
     {
-        public Figure figur;
+        public IFigure figur;
         Graphics graph;
-        public Paint_Figures(Graphics g, Figure f)
+        public Paint_Figures(Graphics g, IFigure f)
         {
             this.graph = g;
             this.figur = f;
@@ -19,7 +20,7 @@ namespace Task_2_3
         {
             this.graph = g;
         }
-        public void Set_Figure(Figure f)
+        public void Set_Figure(IFigure f)
         {
             this.figur = f;
         }

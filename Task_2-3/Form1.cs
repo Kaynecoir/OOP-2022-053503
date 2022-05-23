@@ -10,6 +10,9 @@ using System.Text.Json.Serialization;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using Trapeze; 
+using BasicFigure;
 
 namespace Task_2_3
 {
@@ -33,6 +36,38 @@ namespace Task_2_3
             this.g = Holst.CreateGraphics();
             LabelCountPoint.Visible = true;
             CopuntPoint.Visible = true;
+            List<BasicFigure.IFigure> plugins = new List<BasicFigure.IFigure>();
+            DirectoryInfo pluginDirectory = new DirectoryInfo(System.IO.Path.Combine(Directory.GetCurrentDirectory()));
+            if (!pluginDirectory.Exists)
+                pluginDirectory.Create();
+
+            //берем из директории все файлы с расширением .dll      
+            var pluginFiles = Directory.GetFiles(System.IO.Path.Combine(Directory.GetCurrentDirectory()), "*.dll");
+            foreach (var file in pluginFiles)
+            {
+                //загружаем сборку
+                Assembly asm = Assembly.LoadFrom(file);
+                //ищем типы, имплементирующие наш интерфейс IPlugin,
+                //чтобы не захватить лишнего
+                var types = asm.GetTypes().
+                            Where(t => t.GetInterfaces().
+                            Where(i => i.FullName == typeof(BasicFigure.IFigure).FullName).Any());
+
+                //заполняем экземплярами полученных типов коллекцию плагинов
+                foreach (var type in types)
+                {
+                    Console.WriteLine(type);
+                    var plugin = asm.CreateInstance(type.FullName) as BasicFigure.IFigure;
+                    plugins.Add(plugin);
+                }
+            }
+            cr.SetList(plugins);
+            foreach (var ty in plugins)
+            {
+                ChouseFigure.Items.Add(ty.Name);
+                Console.WriteLine(ty);
+            }
+            Console.WriteLine("Programm Run");
         }
 
         private void Holst_MouseDown(object sender, MouseEventArgs e)
@@ -41,7 +76,7 @@ namespace Task_2_3
             HandPen = new Pen(Color.FromName(PenColorValue.Text), Convert.ToInt32(PenWidthValue.Value));
             ep1 = e.Location;
             ep2 = ep1;
-            nf = new Figure(ep1, ep2, HandPen, ChouseFigure.Text, Convert.ToInt32(CopuntPoint.Value));
+            nf = new Figure(ep1, ep2, HandPen.Color, HandPen.Width, ChouseFigure.Text, Convert.ToInt32(CopuntPoint.Value));
             nf = cr.Creat(nf);
 
 
@@ -142,9 +177,9 @@ namespace Task_2_3
             using (FileStream fs = new FileStream("MyJSONFileForFigures.json", FileMode.Create))
             {
                 var op = new JsonSerializerOptions { WriteIndented = true };
-                Console.WriteLine(JsonSerializer.Serialize<List<Figure>>(ShowFigures, op));
+                //Console.WriteLine(JsonSerializer.Serialize<List<Figure>>(ShowFigures, op));
                 await JsonSerializer.SerializeAsync<List<Figure>>(fs, ShowFigures, op);
-                Console.WriteLine("Data has been saved to file");
+                //Console.WriteLine("Data has been saved to file");
             }
         }
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace Task_2_3
+namespace BasicFigure
+
 {
     [Serializable]
-    class Line_Figure : Figure
+    public class Line_Figure : Figure
     {
         public void Initialization()
         {
@@ -66,7 +67,7 @@ namespace Task_2_3
             // Alternate of Creat_Coordinate
             this.coord[0] = ep1;
             this.coord[1] = ep2;
-        }
+        }/*
         public Line_Figure(Point ep1, Point ep2, Pen pn)
         {
             this.Initialization();
@@ -80,7 +81,7 @@ namespace Task_2_3
             // Alternate of Creat_Coordinate
             this.coord[0] = ep1;
             this.coord[1] = ep2;
-        }
+        }*/
         override public void Change_Size(Point ep1, Point ep2)
         {
             this.LX = Math.Abs(ep1.X - ep2.X) / 2;

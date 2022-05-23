@@ -199,11 +199,6 @@ namespace Task_2_3
             // ChouseFigure
             // 
             this.ChouseFigure.FormattingEnabled = true;
-            this.ChouseFigure.Items.AddRange(new object[] {
-            "Line",
-            "Rectangle",
-            "Circle",
-            "Right"});
             this.ChouseFigure.Location = new System.Drawing.Point(6, 26);
             this.ChouseFigure.Name = "ChouseFigure";
             this.ChouseFigure.Size = new System.Drawing.Size(90, 28);

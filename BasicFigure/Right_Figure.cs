@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
 
-namespace Task_2_3
+namespace BasicFigure
 {
-    class Right_Figure : Figure
+    public class Right_Figure : Figure
     {
         public void Initialization()
         {
@@ -79,20 +79,7 @@ namespace Task_2_3
             this.Right_Down = new Point(A.X + LX, A.Y + LY);
             Creat_Radius();
             Creat_Coordinate();
-        }
-        public Right_Figure(Point ep1, Point ep2, Pen pn)
-        {
-            this.Initialization();
-            this.A = new Point((ep1.X + ep2.X) / 2, (ep1.Y + ep2.Y) / 2);
-            this.LX = Math.Abs(ep1.X - ep2.X) / 2;
-            this.LY = Math.Abs(ep1.Y - ep2.Y) / 2;
-            this.Left_Top = new Point(A.X - LX, A.Y - LY);
-            this.Right_Down = new Point(A.X + LX, A.Y + LY);
-            this.pencolor = pn.Color;
-            this.penwidth = pn.Width;
-            this.Creat_Radius();
-            this.Creat_Coordinate();
-        }
+        }/*
         public Right_Figure(Point ep1, Point ep2, Pen pn, int epoint)
         {
             this.Initialization();
@@ -109,7 +96,7 @@ namespace Task_2_3
             this.penwidth = pn.Width;
             this.Creat_Radius();
             this.Creat_Coordinate();
-        }
+        }*/
         public Right_Figure(int ex, int ey, int epoint)
         {
             this.Initialization();

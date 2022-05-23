@@ -4,10 +4,10 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Drawing;
 
-namespace Task_2_3
+namespace BasicFigure
 {
     [Serializable]
-    class Figure
+    public class Figure : IFigure
     {
         public string Name { get; set; }
         [JsonIgnore]
@@ -49,7 +49,7 @@ namespace Task_2_3
             this.Right_Down = new Point(A.X + LX, A.Y + LY);
             this.isCreat = true;
         }
-        public Figure(Point ep1, Point ep2, Pen pn, string n = "None", int epoint = 2)
+        public Figure(Point ep1, Point ep2, Color pncolor, float pnwidth, string n = "None", int epoint = 2)
         {
             this.Name = n;
             this.copunt_point = epoint;
@@ -58,9 +58,9 @@ namespace Task_2_3
             this.LY = Math.Abs(ep1.Y - ep2.Y) / 2;
             this.Left_Top = new Point(A.X - LX, A.Y - LY);
             this.Right_Down = new Point(A.X + LX, A.Y + LY);
-            this.str_pencolor = pn.Color.Name;
-            this.pencolor = pn.Color;
-            this.penwidth = pn.Width;
+            this.str_pencolor = pncolor.Name;
+            this.pencolor = pncolor;
+            this.penwidth = pnwidth;
             this.isFill = false;
             this.str_color_fill = Color.White.Name;
             this.color_fill = Color.White;
@@ -77,9 +77,52 @@ namespace Task_2_3
             this.isFill = eif;
             this.color_fill = ecf;
         }
-        virtual public void Change_Size(Point ep1, Point ep2) { }
-        virtual public void Change_Fill(Color cl) { }
+        virtual public void Change_Size(Point ep1, Point ep2)
+        {
+            this.LX = Math.Abs(ep1.X - ep2.X) / 2;
+            this.LY = Math.Abs(ep1.Y - ep2.Y) / 2;
+            this.A = new Point((ep1.X + ep2.X) / 2, (ep1.Y + ep2.Y) / 2);
+            this.Left_Top = new Point(this.A.X - this.LX, this.A.Y - this.LY);
+            this.Right_Down = new Point(this.A.X + this.LX, this.A.Y + this.LY);
+            // Alternate of Creat_Coordinate
+            this.coord[0] = ep1;
+            this.coord[1] = ep2;
+        }
+        virtual public void Change_Fill(Color cl)
+        {
+            this.isFill = true;
+            this.color_fill = cl;
+            this.str_color_fill = cl.Name;
+        }
         virtual public void Change_Point(Point ep) { }
+        virtual public void RestFigure(IFigure f)
+        {
+            this.Name = f.Name;
+            this.isCreat = f.isCreat;
+            this.A = f.A;
+            this.LX = f.LX; this.LY = f.LY;
+            this.copunt_point = f.copunt_point;
+            this.inj = 360 / this.copunt_point;
+            this.str_pencolor = f.str_pencolor;
+            this.pencolor = Color.FromName(f.str_pencolor);
+            this.penwidth = f.penwidth;
+            this.isFill = f.isFill;
+            this.str_color_fill = f.str_color_fill;
+            this.color_fill = Color.FromName(f.str_color_fill);
+            this.Left_Top = f.Left_Top;
+            this.Right_Down = f.Right_Down;
+            if (this.isCreat)
+            {
+                this.coord = new Point[this.copunt_point];
+                this.R = new double[this.copunt_point];
+                this.Change_Size(Left_Top, Right_Down);
+            }
+            else
+            {
+                this.coord = f.coord;
+                this.R = f.R;
+            }
+        }
     }
 }
 
