@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using BasicFigure;
-using Trapeze;
 using System.Reflection;
 
 
@@ -22,7 +21,7 @@ namespace Task_2_3
                     return nf;
                 }
             }
-            return new Figure();
+            return f;
         }
         public void SetList(List<IFigure> lf)
         {

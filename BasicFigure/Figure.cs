@@ -7,7 +7,7 @@ using System.Drawing;
 namespace BasicFigure
 {
     [Serializable]
-    public class Figure : IFigure
+    public class Figure : IFigure//, ICloneable
     {
         public string Name { get; set; }
         [JsonIgnore]
@@ -123,6 +123,7 @@ namespace BasicFigure
                 this.R = f.R;
             }
         }
+        //public object Clone() => new Figure();
     }
 }
 

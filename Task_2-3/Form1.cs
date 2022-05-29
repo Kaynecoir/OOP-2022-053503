@@ -11,7 +11,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Reflection;
-using Trapeze; 
 using BasicFigure;
 
 namespace Task_2_3
@@ -37,12 +36,13 @@ namespace Task_2_3
             LabelCountPoint.Visible = true;
             CopuntPoint.Visible = true;
             List<BasicFigure.IFigure> plugins = new List<BasicFigure.IFigure>();
-            DirectoryInfo pluginDirectory = new DirectoryInfo(System.IO.Path.Combine(Directory.GetCurrentDirectory()));
+            DirectoryInfo pluginDirectory = new DirectoryInfo(System.IO.Path.Combine(Directory.GetCurrentDirectory(), "Plugins"));
             if (!pluginDirectory.Exists)
                 pluginDirectory.Create();
 
             //берем из директории все файлы с расширением .dll      
-            var pluginFiles = Directory.GetFiles(System.IO.Path.Combine(Directory.GetCurrentDirectory()), "*.dll");
+            var pluginFiles = Directory.GetFiles(System.IO.Path.Combine("D:\\C++\\GitHub\\OOP-2022-053503\\Plugins"), "*.dll");
+            Console.WriteLine(System.IO.Path.Combine("D:\\C++\\GitHub\\OOP-2022-053503\\Plugins"));
             foreach (var file in pluginFiles)
             {
                 //загружаем сборку
@@ -56,7 +56,6 @@ namespace Task_2_3
                 //заполняем экземплярами полученных типов коллекцию плагинов
                 foreach (var type in types)
                 {
-                    Console.WriteLine(type);
                     var plugin = asm.CreateInstance(type.FullName) as BasicFigure.IFigure;
                     plugins.Add(plugin);
                 }
@@ -78,8 +77,6 @@ namespace Task_2_3
             ep2 = ep1;
             nf = new Figure(ep1, ep2, HandPen.Color, HandPen.Width, ChouseFigure.Text, Convert.ToInt32(CopuntPoint.Value));
             nf = cr.Creat(nf);
-
-
             if (FillColorValue.Text != "None")
             {
                 nf.Change_Fill(Color.FromName(FillColorValue.Text));
